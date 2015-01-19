@@ -14,8 +14,8 @@
 	}
 
 	userSchema.methods.findByApikey = function (_apikey) {
-		this.findOne({apikey:_apikey},function (err, doc){
-		  return doc;
+		this.findOne({apikey:_apikey},function (err, data){
+		  return data;
 		});
 	}
 	

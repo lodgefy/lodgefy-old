@@ -1,7 +1,7 @@
 module.exports = function(app, autenticate) {
 
 
-  app.get('/sensor/', function(req, res, next) {
+  app.get('/sensor/', function (req, res, next) {
     var Sensor = require('../model/sensor').Sensor;
 
     Sensor.find(function (err, data){
@@ -22,17 +22,17 @@ module.exports = function(app, autenticate) {
     });
   });
 
-  app.post('/sensor/updateSensor', function (req, res, next) {
+  app.post('/sensor/updateValue', function (req, res, next) {
     var Sensor = require('../model/sensor').Sensor;
-    var s = Sensor().findById(req.id);
-    s.save(function (err, data) {
-      if (err) {
-        res.send(err);
-      }
-      else {
-        res.send(data);
-      }
+
+    Sensor.findById(req.body.id, function (err, data) {
+      
+      data.updateValue(req.body.value, function (err, data) {
+        res.send(data);  
+      }); 
+      
     });
+    
   });
 
 }

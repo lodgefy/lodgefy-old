@@ -1,7 +1,8 @@
 var util = require('util'),
   express = require('express'),
+  session = require('express-session'),
+  cookieParser = require('cookie-Parser'),
   expressValidator = require('express-validator'),
-  mongoskin = require('mongoskin'),
   bodyParser = require('body-parser'),
   logger = require('morgan'),
   passport = require('passport'),
@@ -10,11 +11,15 @@ var util = require('util'),
 var app = express();
 app.use(bodyParser.json());
 app.use(expressValidator());
+app.use(cookieParser());
+app.use(session({secret: 'OChicoBateuNoBodeEOBodeBateuNoChico',
+  resave: false,
+  saveUninitialized: true
+}));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(logger('dev'));
   app.use(passport.initialize());
 
-var db = mongoskin.db('mongodb://@localhost:27017/lodgefy', {safe:true})
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);

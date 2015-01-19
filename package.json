@@ -1,26 +1,32 @@
 {
-  "name": "rest-api-express",
-  "version": "0.0.4",
+  "name": "lodgefy",
+  "version": "0.0.1",
   "description": "",
-  "main": "express.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node express.js",
+    "start": "node app.js",
     "test": "mocha express.test.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/azat-co/rest-api-express.git"
+    "url": "https://github.com/lodgefy/lodgefy.git"
   },
-  "author": "Azat Mardan",
-  "license": "BSD-2-Clause",
+  "author": "Henri Cavalcante",
+  "license": "GNU/GPL",
   "bugs": {
-    "url": "https://github.com/azat-co/rest-api-express/issues"
+    "url": "https://github.com/lodgefy/lodgefy/issues"
   },
   "dependencies": {
     "body-parser": "1.9.2",
     "express": "4.10.1",
-    "mongoskin": "1.4.4",
-    "morgan": "1.5.0"
+    "mongoose": "3.8.21",
+    "morgan": "1.5.0",
+    "cookie-parser": "1.3.3",
+    "express-session":"1.10.1",
+    "express-validator":"2.8.0",
+    "node-twitter-api":"1.5.0",
+    "passport":"0.2.1",
+    "passport-localapikey":"0.0.3"
   },
   "devDependencies": {
     "expect.js": "0.3.1",
