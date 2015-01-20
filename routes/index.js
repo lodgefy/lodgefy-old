@@ -8,6 +8,6 @@ module.exports = function (app, passport) {
 
 	require('./user')(app, autenticate);
 	require('./twitter')(app, autenticate);
-	require('./sensor')(app, autenticate);
+	require('./io')(app, autenticate);
 
 }
