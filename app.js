@@ -70,9 +70,7 @@ board.on("ready", function() {
       pin: settings.pin,
       isPullup: true
     });
-    // Inject the `button` hardware into
-    // the Repl instance's context;
-    // allows direct command line access
+    
     board.repl.inject({
       button: button
     });
