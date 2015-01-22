@@ -6,7 +6,8 @@ var util = require('util'),
   bodyParser = require('body-parser'),
   logger = require('morgan'),
   passport = require('passport'),
-  LocalStrategy = require('passport-localapikey').Strategy;
+  LocalStrategy = require('passport-localapikey').Strategy,
+  five = require("johnny-five");
 
 var app = express();
 app.use(bodyParser.json());
@@ -45,6 +46,48 @@ passport.use(new LocalStrategy(
     });
   }
 ));
+
+//get all boards from mongodb
+var boardPorts = {
+  port: "/dev/tty.RandomBot-DevB"
+};
+board = new five.Board(boardPorts);
+
+var reedSwitches = [{
+  pin: 4,
+  events: [{name: "down",
+    fn: function (){
+      console.log("teste");
+    }
+  }]
+}];
+
+board.on("ready", function() {
+
+  reedSwitches.forEach(function(settings) {
+
+    button = new five.Button({
+      pin: settings.pin,
+      isPullup: true
+    });
+    // Inject the `button` hardware into
+    // the Repl instance's context;
+    // allows direct command line access
+    board.repl.inject({
+      button: button
+    });
+
+    settings.events.forEach(function(event) {
+      button.on(event.name, function() {
+        event.fn();
+      });
+    })
+
+  });
+  console.log("Initialized Io");
+});
+
+
 
 require('./routes/index')(app, passport);
 

@@ -58,4 +58,13 @@ module.exports = function(app, autenticate) {
     
   });
 
+  app.get('/io/status', function (req, res, next) {
+    var five = app.get('startBoards')();
+
+    
+
+
+    res.send('terminou');
+  })
+
 }

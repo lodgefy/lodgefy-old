@@ -25,7 +25,6 @@
 
 	ioSchema.methods.updateValue = function (value, callback) {
 			var newValue = {}; 
-
 			if(newValue.value = this.updateValueIo(value)) {
 				this.values.push(newValue);
 				this.save(function (err, data) {
@@ -40,7 +39,6 @@
 			else {
 				callback(true, value);
 			}
-			
 	}
 
 	reedSwitchSchema = ioSchema.extend({
