@@ -9,7 +9,7 @@ module.exports = function (app, autenticate) {
 
 	app.post('/user/login', function (req, res, next) {
 		req.checkBody('username', 'Please inform a username.').notEmpty();
-	  req.checkBody('password', 'Please inform a password.').notEmpty();
+		req.checkBody('password', 'Please inform a password.').notEmpty();
 		var errors = req.validationErrors();
 		if (errors) {
 			res.send('There have been validation errors: ' + util.inspect(errors), 400);
@@ -35,6 +35,6 @@ module.exports = function (app, autenticate) {
 				res.send( data );
 			}
 		});
-	})
+	});
 
-}
+};

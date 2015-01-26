@@ -20,12 +20,9 @@ app.use(session({secret: 'OChicoBateuNoBodeEOBodeBateuNoChico',
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(logger('dev'));
   app.use(passport.initialize());
-
-
 passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
-
 passport.deserializeUser(function(id, done) {
   findById(id, function (err, user) {
     done(err, user);
@@ -47,7 +44,6 @@ passport.use(new LocalStrategy(
   }
 ));
 
-//get all boards from mongodb
 var boardPorts = {
   port: "/dev/tty.RandomBot-DevB"
 };
@@ -63,33 +59,25 @@ var reedSwitches = [{
 }];
 
 board.on("ready", function() {
-
   reedSwitches.forEach(function(settings) {
-
     button = new five.Button({
       pin: settings.pin,
       isPullup: true
     });
-    
     board.repl.inject({
       button: button
     });
-
     settings.events.forEach(function(event) {
       button.on(event.name, function() {
         event.fn();
       });
-    })
-
+    });
   });
-  console.log("Initialized Io");
 });
-
-
 
 require('./routes/index')(app, passport);
 
 app.listen(3000, function() {
-  console.log('Express server listening on port 3000')
-})
+  console.log('Express server listening on port 3000');
+});
 

@@ -1,12 +1,10 @@
 module.exports = function(app, autenticate) {
-
   app.get('/io/', function (req, res, next) {
     var Io = require('../model/io').Io;
     Io.find(function (err, data){
       res.send(data);
     });
   });
-
   app.post('/io/', function (req, res, next) {
     var Io = require('../model/io').Io;
     var io = new Io(req.body);
@@ -19,7 +17,6 @@ module.exports = function(app, autenticate) {
       }
     });
   });
-
   app.post('/reed/', function (req, res, next) {
     var ReedSwitch = require('../model/io').ReedSwitch;
     var reedSwitch = new ReedSwitch(req.body);
@@ -35,36 +32,25 @@ module.exports = function(app, autenticate) {
 
   app.post('/io/updateValue', function (req, res, next) {
     var Io = require('../model/io').Io;
-
     Io.findById(req.body.id, function (err, data) {
-      
       data.updateValue(req.body.value, function (err, data) {
         res.send(data);  
       }); 
-      
     });
-    
   });
+
   app.post('/io/updateValueReed', function (req, res, next) {
     var ReedSwitch = require('../model/io').ReedSwitch;
-
     ReedSwitch.findById(req.body.id, function (err, data) {
-      
       data.updateValue(req.body.value, function (err, data) {
         res.send(data);  
       }); 
-      
     });
-    
   });
 
   app.get('/io/status', function (req, res, next) {
     var five = app.get('startBoards')();
-
-    
-
-
     res.send('terminou');
-  })
+  });
 
-}
+};
