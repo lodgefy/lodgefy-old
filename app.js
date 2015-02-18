@@ -45,7 +45,7 @@ passport.use(new LocalStrategy(
 ));
 
 var boardPorts = {
-  port: "/dev/tty.RandomBot-DevB"
+  rport: /modem/
 };
 board = new five.Board(boardPorts);
 
@@ -73,6 +73,10 @@ board.on("ready", function() {
       });
     });
   });
+});
+
+board.on("error", function(msg) {
+  console.log("teste - >> " + msg);
 });
 
 require('./routes/index')(app, passport);
